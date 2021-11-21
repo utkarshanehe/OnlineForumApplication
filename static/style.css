@@ -245,3 +245,100 @@ header{
     font-size: 20px;
     font-weight: bold;
 }
+
+/* posts.html */
+.table-heading{
+    display: flex;
+}
+
+.table-heading div{
+    padding: 5px;
+    margin: 2px;
+    background-color: #EEEEEE;
+    font-weight: bold;
+}
+
+.table-heading .status{
+    flex: 5%;
+}
+
+.table-heading .subjects{
+    flex: 70%;
+}
+
+.table-heading .replies{
+    flex: 10%;
+}
+
+.table-heading .last-reply{
+    flex: 15%;
+}
+
+.table-row{
+    display: flex;
+}
+
+.table-row .status, .table-row .subjects, .table-row .replies, .table-row .last-reply{
+    padding: 5px;
+    margin: 2px;
+    background-color: #EEEEEE;
+}
+
+.table-row .status{
+    flex: 5%;
+    font-size: 30px;
+    text-align: center;
+}
+
+.table-row .subjects{
+    flex: 70%;
+}
+
+.table-row .replies{
+    flex: 10%;
+}
+
+.table-row .last-reply{
+    flex: 15%;
+}
+
+.pagination{
+    padding: 20px;
+    font-size: 15px;
+}
+
+.pagination a{
+    color: #000000;
+    margin-inline: 1px;
+    padding: 5px 10px;
+    border: solid 0.5px black;
+}
+
+.pagination a:hover{
+    opacity: 0.5;
+}
+
+.forum-navigation{
+    margin-block: 20px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.forum-navigation a{
+    color: #000000;
+}
+
+.forum-navigation a:hover{
+    opacity: 0.5;
+}
+
+.status-note{
+    background-color: #EEEEEE;
+    padding: 20px;
+    display: block;
+}
+
+.status-note span{
+    font-size: 15px;
+    margin-block: 5px;
+}
