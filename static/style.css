@@ -20,8 +20,9 @@ h1{
 
 /* index.html */
 .container{
-    margin: 20px;
-    padding: 20px;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 20px;
 }
 
 .forum-list{
@@ -32,7 +33,6 @@ h1{
     background-color: #EEEEEE;
     padding: 5px;
     border-radius: 5px;
-    margin: 4px;
 }
 
 .forum-description *{
@@ -46,7 +46,7 @@ h1{
 
 .forum-column{
     padding: 10px;
-    margin: 4px;
+    margin: 2px;
     border-radius: 5px;
     background-color: #EEEEEE;
 }
@@ -228,4 +228,20 @@ header{
         min-width: 200px;
         margin-top: 5px;
     }
+}
+
+/* Forum app stats */
+.forum-app-stats{
+    padding: 20px;
+    background-color: #EEEEEE;
+    margin-top: 20px;
+    margin-left: 11px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.forum-app-stats-title{
+    font-size: 20px;
+    font-weight: bold;
 }
