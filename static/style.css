@@ -342,3 +342,114 @@ header{
     font-size: 15px;
     margin-block: 5px;
 }
+
+/* post_detail.html */
+.post-container-heading{
+    display: flex;
+    background-color: #EEEEEE;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.author{
+    flex: 20%;
+}
+
+.content{
+    flex: 80%;
+}
+
+.body{
+    display: flex;
+    background-color: #EEEEEE;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.body .author .username{
+    font-size: 20px;
+}
+
+.body .author img{
+    max-width:50px;
+    max-height: 80px;
+}
+
+.body .content .comment button{
+    border:none;
+    padding: 10px;
+    font-weight: bolder;
+    box-shadow: 4px 6px #FFFFFF;
+    cursor: pointer;
+    float: right;
+}
+
+.comment-area{
+    margin-top: 50px;
+}
+
+.comment-area textarea{
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    margin-block: 10px;
+}
+
+.comment-area input{
+    float: right;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-area input:hover{
+    opacity: 0.7;
+}
+
+.hide{
+    display:none;
+}
+
+.comments-container{
+    margin-top: 50px;
+}
+
+.comments-container-heading{
+    display: flex;
+    background-color: #EEEEEE;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.body .content .reply button{
+    border:none;
+    padding: 10px;
+    font-weight: bolder;
+    box-shadow: 4px 6px #FFFFFF;
+    cursor: pointer;
+    float: right;
+}
+
+.reply-area{
+    margin-top: 50px;
+}
+
+.reply-area textarea{
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    margin-block: 10px;
+}
+
+.reply-area input{
+    float: right;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reply-area input:hover{
+    opacity: 0.7;
+}
