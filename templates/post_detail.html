@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load hitcount_tags %}
 {% block content %}
 
     <div class="container">
@@ -8,7 +9,7 @@
             <span>
                 <a href="#">ForumApp - Forums</a> >>
                 <a href="#">Topic</a> >>
-                <a href="#">Post</a>
+                <a href="{{ post.get_url }}">{{ post.title }}</a>
             </span>
         </div>
 
@@ -16,7 +17,7 @@
         <div class="post-container">
             <div class="post-container-heading">
                 <div class="author">Author</div>
-                <div class="content">Topic: {{ post.title }} (Hit 235 times)</div>
+                <div class="content">Topic: {{ post.title }} (Read {% get_hit_count for post %} times)</div>
             </div>
 
             <div class="body">

@@ -6,7 +6,7 @@ from tinymce.models import HTMLField
 from hitcount.models import HitCountMixin, HitCount
 from django.contrib.contenttypes.fields import GenericRelation
 from taggit.managers import TaggableManager
-
+from django.shortcuts import reverse
 User = get_user_model()
 
 
@@ -62,3 +62,9 @@ class Post(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
+
+    def get_url(self):
+        return reverse("post-detail", kwargs={
+            'slug': self.slug
+        })
+
