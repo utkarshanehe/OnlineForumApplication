@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Online Forum
+        </title>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <header>
+
+            <!-- Navbar -->
+            <div class="navbar">
+                <nav class="navigation">
+                    <ul class="navbar-list">
+                        <li class="navbar-item brand">
+                            <a href="#">ForumApp</a>
+                        </li>
+                        <li class="navbar-item">
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="navbar-item">
+                            <a href="#">Forum</a>
+                        </li>
+                        <li class="navbar-item">
+                            <a href="#">Detail</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Search box -->
+            <div class="search-box">
+                <select name="search-dropdown" id="search-dropdown">
+                    <option value="all">All</option>
+                    <option value="titles">Titles</option>
+                    <option value="descriptions">Descriptions</option>
+                </select>
+                <input type="text" name="search-query" id="search-query" placeholder="Search">
+                <button><i class="fa fa-search"></i></button>
+            </div>
+        </header>
+
+        {% block content %}
+        {% endblock content %}
+        <script src="{% static 'main.js' %}"></script>
+    </body>
+</html>
