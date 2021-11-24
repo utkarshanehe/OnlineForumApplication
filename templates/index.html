@@ -7,103 +7,33 @@
         </div>
 
         <div class="forum-list">
-            <!-- Forum 1 begins-->
+
+            {% for forum in forums %}
             <div class="forum-row">
                 <div class="forum-icon forum-column center">
                     <i class="fa fa-car"></i>
                 </div>
 
                 <div class="forum-description forum-column">
-                    <h1><a href="">Forum Title</a></h1>
-                    <p>Forum Description: Description for the forum</p>
+                    <h1><a href="{{ forum.get_url }}">{{ forum.title }}</a></h1>
+                    <p>{{ forum.description }}</p>
                 </div>
 
                 <div class="forum-stats forum-column center">
-                    <span>12 posts | 3 topics</span>
+                    <span>{{ forum.number_of_posts }} posts</span>
                 </div>
 
                 <div class="forum-info forum-column">
-                    <b><a href="">Last post</a></b> by <a href="">User</a>
+                    <b><a href="{{ forum.last_post.get_url }}">Last post</a></b>
+                    by <a href="#">{{ forum.last_post.author.full_name }}</a>
                     <br/>
-                    on <small>31 Dec 2021</small>
+                    on <small>{{ forum.last_post.timestamp|date }}</small>
                 </div>
             </div>
-            <!-- Forum 1 ends-->
+            {% endfor %}
 
             <hr class="forum-divider"/>
 
-            <!-- Forum 2 begins-->
-            <div class="forum-row">
-                <div class="forum-icon forum-column center">
-                    <i class="fa fa-car"></i>
-                </div>
-
-                <div class="forum-description forum-column">
-                    <h1><a href="">Forum Title</a></h1>
-                    <p>Forum Description: Description for the forum</p>
-                </div>
-
-                <div class="forum-stats forum-column center">
-                    <span>12 posts | 3 topics</span>
-                </div>
-
-                <div class="forum-info forum-column">
-                    <b><a href="">Last post</a></b> by <a href="">User</a>
-                    <br/>
-                    on <small>31 Dec 2021</small>
-                </div>
-            </div>
-            <!-- Forum 2 ends-->
-
-            <hr class="forum-divider"/>
-
-            <!-- Forum 3 begins-->
-            <div class="forum-row">
-                <div class="forum-icon forum-column center">
-                    <i class="fa fa-car"></i>
-                </div>
-
-                <div class="forum-description forum-column">
-                    <h1><a href="">Forum Title</a></h1>
-                    <p>Forum Description: Description for the forum</p>
-                </div>
-
-                <div class="forum-stats forum-column center">
-                    <span>12 posts | 3 topics</span>
-                </div>
-
-                <div class="forum-info forum-column">
-                    <b><a href="">Last post</a></b> by <a href="">User</a>
-                    <br/>
-                    on <small>31 Dec 2021</small>
-                </div>
-            </div>
-            <!-- Forum 3 ends-->
-
-            <hr class="forum-divider"/>
-
-            <!-- Forum 4 begins-->
-            <div class="forum-row">
-                <div class="forum-icon forum-column center">
-                    <i class="fa fa-car"></i>
-                </div>
-
-                <div class="forum-description forum-column">
-                    <h1><a href="">Forum Title</a></h1>
-                    <p>Forum Description: Description for the forum</p>
-                </div>
-
-                <div class="forum-stats forum-column center">
-                    <span>12 posts | 3 topics</span>
-                </div>
-
-                <div class="forum-info forum-column">
-                    <b><a href="">Last post</a></b> by <a href="">User</a>
-                    <br/>
-                    on <small>31 Dec 2021</small>
-                </div>
-            </div>
-            <!-- Forum 4 ends-->
         </div>
     </div>
 
