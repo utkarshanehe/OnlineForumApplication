@@ -70,11 +70,30 @@
             </div>
         </div>
 
-        <!-- Reply area -->
+        <!-- Add new reply -->
         <div class="reply-area hide" id="reply-area">
             <textarea name="reply-inout" id="" placeholder="Reply here"></textarea>
             <input type="submit" value="Submit">
         </div>
+
+        <!-- Show replies -->
+        {% for reply in comment.replies.all %}
+        <div class="reply-container" style="width:95%; margin-left: 5%;">
+            <div class="body">
+                <div class="author">
+                    <div class="username"><a href="#">{{ reply.user.full_name|title}}</a> </div>
+                    <div>Role</div>
+                    <img src="{{ comment.user.profile_pic.url }}" alt="">
+                    <div>Posts: <u>{{ reply.user.number_of_posts }}</u></div>
+                    <div>Points:<u>{{ reply.user.points }}</u></div>
+                </div>
+
+                <div class="content">
+                    {{ reply.content }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
         {% endfor %}
     </div>
 
