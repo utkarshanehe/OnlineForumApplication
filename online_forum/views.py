@@ -21,4 +21,6 @@ def show_post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     context = {'post': post}
     update_views(request, post)
+    print(post.title)
+    print(post.comments)
     return render(request, 'post_detail.html', context)

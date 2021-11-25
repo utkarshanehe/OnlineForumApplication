@@ -26,6 +26,11 @@ class Author(models.Model):
             self.slug = slugify(self.full_name)
         super(Author, self).save(self, *args, **kwargs)
 
+    # Returns the number of posts posted by this author
+    @property
+    def number_of_posts(self):
+        return Post.objects.filter(author=self).count()
+
 
 class Category(models.Model):
     title = models.CharField(max_length=100)
@@ -59,6 +64,28 @@ class Category(models.Model):
         return Post.objects.filter(categories=self).latest('timestamp')
 
 
+class Reply(models.Model):
+    user = models.ForeignKey(Author, on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.content[:100]
+
+    class Meta:
+        verbose_name_plural = "replies"
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(Author, on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    replies = models.ManyToManyField(Reply, blank=True)
+
+    def __str__(self):
+        return self.content[:100]
+
+
 class Post(models.Model):
     title = models.CharField(max_length=1000)
     slug = models.SlugField(max_length=1500, unique=True, blank=True)
@@ -70,6 +97,7 @@ class Post(models.Model):
     hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
                                         related_query_name='hit_count_generic_relation')
     tags = TaggableManager()
+    comments = models.ManyToManyField(Comment, blank=True)
 
     def __str__(self):
         return self.title
