@@ -6,8 +6,8 @@
         <!-- Navigation -->
         <div class="forum-navigation">
             <span>
-                <a href="#">ForumApp - Forums</a> >>
-                <a href="#">Topic</a>
+                <a href="{% url 'index' %}">ForumApp</a> >>
+                <a href="{{ forum.get_url }}">{{ forum.title }}</a>
             </span>
         </div>
 
@@ -15,8 +15,8 @@
             <div class="table-heading">
                 <div class="status">Status</div>
                 <div class="subjects">Subjects</div>
-                <div class="replies">Replies/Views</div>
-                <div class="last-reply">Last reply</div>
+                <div class="replies">Comments/<br/>Views</div>
+                <div class="last-reply">Last Comment</div>
             </div>
 
             <div class="table-body">
@@ -28,12 +28,12 @@
                         <span>Started by <b><a href="#">{{ post.author.full_name|title }}</a></b></span>
                     </div>
                     <div class="replies">
-                        5 replies <br/> {% get_hit_count for post %} views
+                        {{ post.number_of_comments }} comments <br/> {% get_hit_count for post %} views
                     </div>
                     <div class="last-reply">
-                        1 Nov 2021
+                        {{ post.last_comment.timestamp|date }}
                         <br/>
-                        By <b><a href="#">User</a></b>
+                        By <b><a href="#">{{ post.last_comment.user.full_name|title }}</a></b>
                     </div>
                 </div>
                 {% endfor %}

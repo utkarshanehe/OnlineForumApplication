@@ -12,8 +12,10 @@ def index(request):
 def show_posts(request, slug):
     category = get_object_or_404(Category, slug=slug)
     posts = Post.objects.filter(approved=True, categories=category)
-    context = {'posts': posts}
-    print(posts)
+    context = {
+        'posts': posts,
+        'forum': category,
+    }
     return render(request, 'posts.html', context)
 
 

@@ -112,3 +112,13 @@ class Post(models.Model):
             'slug': self.slug
         })
 
+    # Returns the number of comments in this post
+    @property
+    def number_of_comments(self):
+        return self.comments.count()
+
+    # Returns the last comment for this post
+    @property
+    def last_comment(self):
+        return self.comments.latest('timestamp')
+
