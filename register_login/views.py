@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from register_login.forms import UpdateForm
+from django.contrib.auth import logout as logoutuser
 
 
 def signup(request):
@@ -67,3 +68,9 @@ def update_profile(request):
         "title": "Update Profile",
     })
     return render(request, "register_login/update_profile.html", context)
+
+
+@login_required
+def logout(request):
+    logoutuser(request)
+    return redirect("index")
