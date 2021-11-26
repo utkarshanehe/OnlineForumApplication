@@ -3,11 +3,10 @@
 {% block content %}
 
     <div class="container">
-        <!-- Navigation -->
+
         <div class="forum-navigation">
             <span>
-                <a href="{% url 'index' %}">ForumApp</a> >>
-                <a href="{{ forum.get_url }}">{{ forum.title }}</a>
+                Search: {{ search_query }} -> {{ search_result|length }} result(s) found
             </span>
         </div>
 
@@ -20,7 +19,7 @@
             </div>
 
             <div class="table-body">
-                {% for post in posts %}
+                {% for post in search_result %}
                 <div class="table-row">
                     <div class="status"><i class="fa fa-fire"></i></div>
                     <div class="subjects">
@@ -39,40 +38,6 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
-
-    <!--Pagination starts-->
-    <div class="pagination">
-        Pages: {% for num_page in posts.paginator.page_range %} <a href="?page={{num_page}}">{{num_page}}</a> {% endfor %}
-    </div>
-    <!--pagination ends-->
-
-    <!-- Status note -->
-    <div class="status-note">
-            <span>
-                <i class="fa fa-rocket"></i> &nbsp;High engagement topic
-            </span>
-            <br/>
-
-            <span>
-                <i class="fa fa-fire"></i> &nbsp;Popular topic
-            </span>
-            <br/>
-
-            <span>
-                <i class="fa fa-book"></i> &nbsp;Low Engagement topic
-            </span>
-            <br/>
-
-            <span>
-                <i class="fa fa-frown-o"></i> &nbsp;0 Engagement topic
-            </span>
-            <br/>
-
-            <span>
-                <i class="fa fa-lock"></i> &nbsp;Closed topic
-            </span>
-            <br/>
     </div>
 
 {% endblock content %}

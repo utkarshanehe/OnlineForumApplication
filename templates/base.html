@@ -46,15 +46,17 @@
             </div>
 
             <!-- Search box -->
-            <div class="search-box">
-                <select name="search-dropdown" id="search-dropdown">
-                    <option value="all">All</option>
-                    <option value="titles">Titles</option>
-                    <option value="descriptions">Descriptions</option>
-                </select>
-                <input type="text" name="search-query" id="search-query" placeholder="Search">
-                <button><i class="fa fa-search"></i></button>
-            </div>
+            <form action="{% url 'search-post' %}" method="GET" role="form">
+                <div class="search-box">
+                    <select name="search-dropdown" id="search-dropdown">
+                        <option value="all">All</option>
+                        <option value="titles">Titles</option>
+                        <option value="descriptions">Descriptions</option>
+                    </select>
+                    <input type="text" name="search-query" id="search-query" placeholder="Search">
+                    <button type="submit" name="search-form"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
         </header>
 
         {% block content %}

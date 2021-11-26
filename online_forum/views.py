@@ -104,3 +104,7 @@ def create_post(request):
         "title": "Create New Post"
     })
     return render(request, "create_post.html", context)
+
+
+def search_post(request):
+    return render(request, "search_post.html")
