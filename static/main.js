@@ -3,7 +3,7 @@ function showCommentArea() {
     commentArea.classList.remove("hide");
 }
 
-function showCommentReplyArea() {
-    var replyArea = document.getElementById("reply-area");
+function showCommentReplyArea(id) {
+    var replyArea = document.getElementById(id);
     replyArea.classList.remove("hide");
 }
