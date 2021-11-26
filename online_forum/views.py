@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Author, Category, Post
 from .utils import update_views
+from .forms import CreatePostForm
 
 
 def index(request):
@@ -26,3 +28,29 @@ def show_post_detail(request, slug):
     print(post.title)
     print(post.comments)
     return render(request, 'post_detail.html', context)
+
+
+@login_required
+def create_post(request):
+    context = {}
+    form = CreatePostForm(request.POST or None)
+
+    if request.method == "POST":
+        if form.is_valid():
+            try:
+                author = Author.objects.get(user=request.user)
+            except Author.DoesNotExist:
+                author = None
+
+            form.instance.author = author
+            new_post = form.save(commit=False)
+            new_post.user = author
+            new_post.save()
+
+            return redirect("index")
+
+    context.update({
+        "form": form,
+        "title": "Create New Post"
+    })
+    return render(request, "create_post.html", context)

@@ -16,7 +16,7 @@ def signup(request):
             login(request, new_user)
 
             # After successful signup redirect the user to profile update page
-            return redirect("update_profile")
+            return redirect("update-profile")
 
     context.update({
         "form": form,

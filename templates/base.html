@@ -19,17 +19,28 @@
                 <nav class="navigation">
                     <ul class="navbar-list">
                         <li class="navbar-item brand">
-                            <a href="#">ForumApp</a>
+                            <a href="{% url 'index' %}">ForumApp</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="navbar-item">
+                            <a href="{% url 'create-post' %}">Create Post</a>
+                        </li>
+                        {% endif %}
+                        <li class="navbar-item">
+                            <a href="{% url 'index' %}">Home</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="navbar-item">
+                            <a href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="navbar-item">
+                            <a href="{% url 'signup' %}">Signup</a>
                         </li>
                         <li class="navbar-item">
-                            <a href="#">Home</a>
+                            <a href="{% url 'signin' %}">Signin</a>
                         </li>
-                        <li class="navbar-item">
-                            <a href="#">Forum</a>
-                        </li>
-                        <li class="navbar-item">
-                            <a href="#">Detail</a>
-                        </li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
