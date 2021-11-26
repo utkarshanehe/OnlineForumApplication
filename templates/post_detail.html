@@ -7,7 +7,7 @@
         <!-- Navigation -->
         <div class="forum-navigation">
             <span>
-                <a href="#">ForumApp - Forums</a> >>
+                <a href="{% url 'index' %}">ForumApp - Forums</a> >>
                 <a href="{{ post.categories.all.0.get_url }}">{{ post.categories.all.0 }}</a> >>
                 <a href="{{ post.get_url }}">{{ post.title }}</a>
             </span>

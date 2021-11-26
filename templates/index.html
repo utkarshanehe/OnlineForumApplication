@@ -43,8 +43,9 @@
             Forum - Stats &nbsp; <i class="fa fa-bar-chart"></i>
         </div>
         <div>
-            <span><u>1021</u> Posts in <u>21</u> Topics</span><br/>
-            <span>Latest Post: <b><a href="#">Post</a></b> on 31 Dec 2021 by <a href="#">User</a> </span>
+            <span><u>{{ number_of_posts }}</u> Posts in <u>{{ number_of_forums }}</u> Forums by <u>{{ number_of_users }}</u> Members</span><br/>
+            <span>Latest Post: <b><a href="{{ last_post.get_url }}">{{ last_post.title }}</a>
+            </b> on {{ last_post.timestamp|date }} by <a href="">{{ last_post.author.full_name|title }}</a> </span>
         </div>
     </div>
 
