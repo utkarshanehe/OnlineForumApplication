@@ -22,7 +22,19 @@
             <div class="table-body">
                 {% for post in posts %}
                 <div class="table-row">
-                    <div class="status"><i class="fa fa-fire"></i></div>
+
+                    {% if post.closed == True %}
+                        <div class="status"><i class="fa fa-lock"></i></div>
+                    {% elif post.number_of_comments == 0 %}
+                        <div class="status"><i class="fa fa-frown-o"></i></div>
+                    {% elif post.number_of_comments > 0 and post.number_of_comments <= 2 %}
+                        <div class="status"><i class="fa fa-book"></i></div>
+                    {% elif post.number_of_comments > 2 and post.number_of_comments <= 5 %}
+                        <div class="status"><i class="fa fa-rocket"></i></div>
+                    {% elif post.number_of_comments >= 5 %}
+                        <div class="status"><i class="fa fa-fire"></i></div>
+                    {% endif %}
+
                     <div class="subjects">
                         <a href="{{ post.get_url }}">{{ post.title }}<br>
                         <span>Started by <b><a href="#">{{ post.author.full_name|title }}</a></b></span>
