@@ -15,9 +15,9 @@
         </div>
         <!-- Navigation ends -->
 
-        <!-- Posts-table begins -->
-        <div class="row">
-            {% if search_result %}
+        {% if search_result %}
+            <!-- Posts-table begins -->
+            <div class="row">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <table class="table">
@@ -66,39 +66,39 @@
                         </table>
                     </div>
                 </div>
-            {% else %}
-                <h2>No posts found</h2>
-            {% endif %}
-        </div>
-        <!-- Posts-table ends -->
+            </div>
+            <!-- Posts-table ends -->
 
-        <!-- Post status note -->
-        <div class="row" style="font-size: 16px;">
-            <h3>Post Status</h3>
-            <span>
-                <i class="fa fa-rocket"></i> &nbsp;High engagement topic
-            </span>
-            <br/>
+            <!-- Post status note -->
+            <div class="row" style="font-size: 16px;">
+                <h3>Post Status</h3>
+                <span>
+                    <i class="fa fa-rocket"></i> &nbsp;High engagement topic
+                </span>
+                <br/>
 
-            <span>
-                <i class="fa fa-fire"></i> &nbsp;Popular topic
-            </span>
-            <br/>
+                <span>
+                    <i class="fa fa-fire"></i> &nbsp;Popular topic
+                </span>
+                <br/>
 
-            <span>
-                <i class="fa fa-book"></i> &nbsp;Low Engagement topic
-            </span>
-            <br/>
+                <span>
+                    <i class="fa fa-book"></i> &nbsp;Low Engagement topic
+                </span>
+                <br/>
 
-            <span>
-                <i class="fa fa-frown-o"></i> &nbsp;0 Engagement topic
-            </span>
-            <br/>
+                <span>
+                    <i class="fa fa-frown-o"></i> &nbsp;0 Engagement topic
+                </span>
+                <br/>
 
-            <span>
-                <i class="fa fa-lock"></i> &nbsp;Closed topic
-            </span>
-            <br/>
-        </div>
+                <span>
+                    <i class="fa fa-lock"></i> &nbsp;Closed topic
+                </span>
+                <br/>
+            </div>
+        {% else %}
+            <h2>No posts found</h2>
+        {% endif %}
     </div>
 {% endblock content %}

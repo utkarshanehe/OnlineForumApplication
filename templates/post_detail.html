@@ -5,46 +5,27 @@
     <div class="container">
 
         <!-- Navigation -->
-        <div class="forum-navigation">
-            <span>
-                <a href="{% url 'index' %}">ForumApp - Forums</a> >>
-                <a href="{{ post.categories.all.0.get_url }}">{{ post.categories.all.0 }}</a> >>
-                <a href="{{ post.get_url }}">{{ post.title }}</a>
-            </span>
+        <div class="row">
+            <div class="forum-navigation">
+                <span>
+                    <h4>
+                        <a href="{% url 'index' %}">ForumApp - Forums</a> >>
+                        <a href="{{ post.categories.all.0.get_url }}">{{ post.categories.all.0 }}</a> >>
+                        <a href="{{ post.get_url }}">{{ post.title }}</a>
+                    </h4>
+                </span>
+            </div>
         </div>
 
         {% if post.closed == True %}
         <div style="background-color: #fff; font-size: 15px; color: #F00; font-weight: bolder; padding-bottom:15px;  width: 100%;"> This Topic Is Closed! </div>
         {% endif %}
 
-        <!-- Post detail -->
-        <div class="post-container">
-            <div class="post-container-heading">
-                <div class="author">Author</div>
-                <div class="content">Topic: {{ post.title }} (Read {% get_hit_count for post %} times)</div>
-            </div>
 
-            <div class="body">
-                <div class="author">
-                    <div class="username"><a href="#">{{ post.author.full_name|title }}</a> </div>
-                    <div>Role</div>
-                    <img src="{{ post.author.profile_pic.url }}" alt="Loading...">
-                    <div>Posts: <u>45</u></div>
-                    <div>Points:<u>5123</u></div>
-                </div>
+        <!-- comment-reply code begins -->
+        <div class="comments-container">
 
-                <div class="content">
-                    {{ post.content|safe }}
-                    {% if post.closed == False %}
-                    <div class="comment">
-                        <button onclick="showCommentArea()">Comment</button>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
-        <!-- Add new comment -->
+		<!-- Add new comment -->
         {% if request.user.is_authenticated == False and post.closed == False %}
         <div style="background-color: #fff; color: #000; font-weight: bolder; padding: 20px; width: 100%;">
             You need to
@@ -63,66 +44,69 @@
         </form>
         {% endif %}
 
-        <!-- Show comments -->
-        <div class="comments-container">
-            <div class="comments-container-heading">
-                <div class="author">Author</div>
-                <div class="content">Comments</div>
-            </div>
+		<ul id="comments-list" class="comments-list">
+			{% for comment in post.comments.all %}
+			<li>
+				<div class="comment-main-level">
+					<!-- Avatar -->
+					<div class="comment-avatar"><img src="{{ comment.user.profile_pic.url }}" alt="Loading..."></div>
 
-            {% for comment in post.comments.all %}
-            <div class="body">
-                <div class="author">
-                    <div class="username"><a href="#">{{ comment.user.full_name|title}}</a> </div>
-                    <div>Role</div>
-                    <img src="{{ comment.user.profile_pic.url }}" alt="">
-                    <div>Posts: <u>{{ comment.user.number_of_posts }}</u></div>
-                    <div>Points:<u>{{ comment.user.points }}</u></div>
-                </div>
+					<div class="comment-box">
+						<div class="comment-head">
+							<h6 class="comment-name by-author">{{ comment.user.full_name|title}}</h6>
 
-                <div class="content">
-                    {{ comment.content }}
-                    {% if post.closed == False and request.user.is_authenticated %}
-                    <div class="reply">
-                        <button onclick="showCommentReplyArea('comment-{{ comment.id }}')">Reply</button>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+							{% if post.closed == False and request.user.is_authenticated %}
+							<button style="background-color:#FFF; border: none;" onclick="showCommentReplyArea('comment-{{ comment.id }}');">
+								<i class="fa fa-reply"></i>
+							</button>
+							{% endif %}
 
-        <!-- Add new reply -->
-        {% if post.closed == False and request.user.is_authenticated%}
-        <form action="." method="POST">
-            {% csrf_token %}
-            <div class="reply-area hide" id="comment-{{ comment.id }}">
-                <textarea name="reply-input" id="reply-input" placeholder="Reply here"></textarea>
-                <input type="submit" value="Submit" name="reply-form">
-                <input type="hidden" name="comment-id" value="{{ comment.id }}">
-                <br/><br/><br/><br/>
-            </div>
-        </form>
-        {% endif %}
+						</div>
+						<div class="comment-content">
+							{{ comment.content }}
+						</div>
 
-        <!-- Show replies -->
-        {% for reply in comment.replies.all %}
-        <div class="reply-container" style="width:95%; margin-left: 5%;">
-            <div class="body">
-                <div class="author">
-                    <div class="username"><a href="#">{{ reply.user.full_name|title}}</a> </div>
-                    <div>Role</div>
-                    <img src="{{ comment.user.profile_pic.url }}" alt="">
-                    <div>Posts: <u>{{ reply.user.number_of_posts }}</u></div>
-                    <div>Points:<u>{{ reply.user.points }}</u></div>
-                </div>
+						 <!-- Add new reply -->
+						{% if post.closed == False and request.user.is_authenticated%}
+						<br/>
+						<form action="." method="POST">
+							{% csrf_token %}
+							<div class="reply-area hide" id="comment-{{ comment.id }}">
+								<textarea name="reply-input" id="reply-input" placeholder="Reply here"></textarea>
+								<input type="submit" value="Submit" name="reply-form">
+								<input type="hidden" name="comment-id" value="{{ comment.id }}">
+								<br/><br/><br/><br/>
+							</div>
+						</form>
+						{% endif %}
 
-                <div class="content">
-                    {{ reply.content }}
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-        {% endfor %}
+					</div>
+				</div>
+
+
+				<ul class="comments-list reply-list">
+					{% for reply in comment.replies.all %}
+					<li>
+						<!-- Avatar -->
+						<div class="comment-avatar"><img src="{{ comment.user.profile_pic.url }}" alt="Loading..."></div>
+
+						<div class="comment-box">
+							<div class="comment-head">
+								<h6 class="comment-name">{{ reply.user.full_name|title}}</h6>
+								<span>On {{ reply.timestamp|date }}</span>
+							</div>
+							<div class="comment-content">
+								 {{ reply.content }}
+							</div>
+						</div>
+					</li>
+					{% endfor %}
+				</ul>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+
     </div>
 
 {% endblock content %}
