@@ -3,64 +3,96 @@
 {% block content %}
 
     <div class="container">
-        <!-- Navigation -->
-        <div class="forum-navigation">
+        <!-- Navigation starts -->
+        <div class="row">
+            <div class="forum-navigation">
             <span>
-                <a href="{% url 'index' %}">ForumApp</a> >>
-                <a href="{{ forum.get_url }}">{{ forum.title }}</a>
+                <h4>
+                    <a href="{% url 'index' %}">ForumApp</a> >>
+                    <a href="{{ forum.get_url }}">{{ forum.title }}</a>
+                </h4>
             </span>
-        </div>
-
-        <div class="posts-table">
-            <div class="table-heading">
-                <div class="status">Status</div>
-                <div class="subjects">Subjects</div>
-                <div class="replies">Comments/<br/>Views</div>
-                <div class="last-reply">Last Comment</div>
             </div>
+        </div>
+        <!-- Navigation ends -->
 
-            <div class="table-body">
-                {% for post in posts %}
-                <div class="table-row">
+        <!-- Posts-table begins -->
+        <div class="row">
+            {% if posts %}
+                <h2>All Posts</h2>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Subject</th>
+                                    <th>Comments/Views</th>
+                                    <th>Last comment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for post in posts %}
+                                    <tr>
+                                        <td class="post-status-icon">
+                                           {% if post.closed == True %}
+                                                <div class="status"><i class="fa fa-lock"></i></div>
+                                            {% elif post.number_of_comments == 0 %}
+                                                <div class="status"><i class="fa fa-frown-o"></i></div>
+                                            {% elif post.number_of_comments > 0 and post.number_of_comments <= 2 %}
+                                                <div class="status"><i class="fa fa-book"></i></div>
+                                            {% elif post.number_of_comments > 2 and post.number_of_comments <= 5 %}
+                                                <div class="status"><i class="fa fa-rocket"></i></div>
+                                            {% elif post.number_of_comments >= 5 %}
+                                                <div class="status"><i class="fa fa-fire"></i></div>
+                                            {% endif %}
+                                        </td>
 
-                    {% if post.closed == True %}
-                        <div class="status"><i class="fa fa-lock"></i></div>
-                    {% elif post.number_of_comments == 0 %}
-                        <div class="status"><i class="fa fa-frown-o"></i></div>
-                    {% elif post.number_of_comments > 0 and post.number_of_comments <= 2 %}
-                        <div class="status"><i class="fa fa-book"></i></div>
-                    {% elif post.number_of_comments > 2 and post.number_of_comments <= 5 %}
-                        <div class="status"><i class="fa fa-rocket"></i></div>
-                    {% elif post.number_of_comments >= 5 %}
-                        <div class="status"><i class="fa fa-fire"></i></div>
-                    {% endif %}
+                                        <td>
+                                            <a href="{{ post.get_url }}">{{ post.title }}<br></a>
+                                            Started by {{ post.author.full_name|title }}
+                                        </td>
 
-                    <div class="subjects">
-                        <a href="{{ post.get_url }}">{{ post.title }}<br></a>
-                        <span>Started by <b><a href="#">{{ post.author.full_name|title }}</a></b></span>
-                    </div>
-                    <div class="replies">
-                        {{ post.number_of_comments }} comments <br/> {% get_hit_count for post %} views
-                    </div>
-                    <div class="last-reply">
-                        {{ post.last_comment.timestamp|date }}
-                        <br/>
-                        By <b><a href="#">{{ post.last_comment.user.full_name|title }}</a></b>
+                                        <td>
+                                            {{ post.number_of_comments }} comments <br/> {% get_hit_count for post %} views
+                                        </td>
+
+                                        <td>
+                                            {{ post.last_comment.timestamp|date }}
+                                            <br/>
+                                            By {{ post.last_comment.user.full_name|title }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                {% endfor %}
-            </div>
+            {% else %}
+                <h2>No posts found</h2>
+            {% endif %}
         </div>
-    </div>
+        <!-- Posts-table ends -->
 
-    <!--Pagination starts-->
-    <div class="pagination">
-        Pages: {% for num_page in posts.paginator.page_range %} <a href="?page={{num_page}}">{{num_page}}</a> {% endfor %}
-    </div>
-    <!--pagination ends-->
+        <!--Pagination starts-->
+        <div class="row">
+            <center>
+            <nav>
+                <ul class="pagination">
+                    {% for num_page in posts.paginator.page_range %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num_page }}">{{ num_page }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </center>
+        </div>
+        <!--pagination ends-->
 
-    <!-- Status note -->
-    <div class="status-note">
+        <!-- Post status note -->
+        <div class="row" style="font-size: 16px;">
+            <h3>Post Status</h3>
             <span>
                 <i class="fa fa-rocket"></i> &nbsp;High engagement topic
             </span>
@@ -85,6 +117,6 @@
                 <i class="fa fa-lock"></i> &nbsp;Closed topic
             </span>
             <br/>
+        </div>
     </div>
-
 {% endblock content %}

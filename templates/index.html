@@ -2,51 +2,77 @@
 {% block content %}
 
     <div class="container">
-        <div class="forum-title">
-            <h1>General information</h1>
+        <div class="row">
+            {% if forums %}
+                <h2>All Forums</h2>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Forum</th>
+                                    <th>Posts</th>
+                                    <th>Last post</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for forum in forums %}
+                                <tr>
+                                    <td>
+                                        <h4><a href="{{ forum.get_url }}">{{ forum.title }}</a></h4>
+                                        <p>{{ forum.description }}</p>
+                                    </td>
+
+                                    <td>
+                                        <span>{{ forum.number_of_posts }} posts</span>
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ forum.last_post.get_url }}">Last post</a>
+                                        by {{ forum.last_post.author.full_name }}
+                                        <br/>
+                                        on {{ forum.last_post.timestamp|date }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            {% else %}
+                <h2>No forums found</h2>
+            {% endif %}
         </div>
 
-        <div class="forum-list">
-
-            {% for forum in forums %}
-            <div class="forum-row">
-                <div class="forum-icon forum-column center">
-                    <i class="fa fa-car"></i>
-                </div>
-
-                <div class="forum-description forum-column">
-                    <h1><a href="{{ forum.get_url }}">{{ forum.title }}</a></h1>
-                    <p>{{ forum.description }}</p>
-                </div>
-
-                <div class="forum-stats forum-column center">
-                    <span>{{ forum.number_of_posts }} posts</span>
-                </div>
-
-                <div class="forum-info forum-column">
-                    <b><a href="{{ forum.last_post.get_url }}">Last post</a></b>
-                    by <a href="#">{{ forum.last_post.author.full_name }}</a>
-                    <br/>
-                    on <small>{{ forum.last_post.timestamp|date }}</small>
-                </div>
-            </div>
-            {% endfor %}
-
-            <hr class="forum-divider"/>
-
-        </div>
-    </div>
 
     <!-- Forum info -->
-    <div class="forum-app-stats">
-        <div class="forum-app-stats-title">
-            Forum - Stats &nbsp; <i class="fa fa-bar-chart"></i>
-        </div>
+    <div class="row">
+        <span style="font-size: 25px;">
+            <i class="fa fa-bar-chart"></i>
+            Forum Statistics
+        </span>
+
         <div>
-            <span><u>{{ number_of_posts }}</u> Posts in <u>{{ number_of_forums }}</u> Forums by <u>{{ number_of_users }}</u> Members</span><br/>
-            <span>Latest Post: <b><a href="{{ last_post.get_url }}">{{ last_post.title }}</a>
-            </b> on {{ last_post.timestamp|date }} by <a href="">{{ last_post.author.full_name|title }}</a> </span>
+            <span>
+                <b>{{ number_of_posts }}</b> Posts in
+                <b>{{ number_of_forums }}</b> Forums by
+                <b>{{ number_of_users }}</b> Members
+            </span>
+
+            <br/>
+
+            <span>
+                Latest Post:
+                <b>
+                    <a href="{{ last_post.get_url }}">
+                        {{ last_post.title }}
+                    </a>
+                </b>
+                on {{ last_post.timestamp|date }} by {{ last_post.author.full_name|title }}
+            </span>
         </div>
     </div>
-
+</div>
 {% endblock content %}
