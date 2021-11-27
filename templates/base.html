@@ -1,6 +1,5 @@
 {% load static %}
 
-<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -10,54 +9,67 @@
         </title>
         <link rel="stylesheet" href="{% static 'style.css' %}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <header>
+         <nav class="navbar navbar-inverse">
 
-            <!-- Navbar -->
-            <div class="navbar">
-                <nav class="navigation">
-                    <ul class="navbar-list">
-                        <li class="navbar-item brand">
-                            <a href="{% url 'index' %}">ForumApp</a>
-                        </li>
-                        {% if user.is_authenticated %}
-                        <li class="navbar-item">
-                            <a href="{% url 'create-post' %}">Create Post</a>
-                        </li>
-                        {% endif %}
-                        <li class="navbar-item">
-                            <a href="{% url 'index' %}">Home</a>
-                        </li>
-                        {% if user.is_authenticated %}
-                        <li class="navbar-item">
-                            <a href="{% url 'logout' %}">Logout</a>
-                        </li>
-                        {% else %}
-                        <li class="navbar-item">
-                            <a href="{% url 'signup' %}">Signup</a>
-                        </li>
-                        <li class="navbar-item">
-                            <a href="{% url 'signin' %}">Signin</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </nav>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'index' %}">ForumApp</a>
             </div>
 
-            <!-- Search box -->
-            <form action="{% url 'search-post' %}" method="GET" role="form">
-                <div class="search-box">
-                    <select name="search-dropdown" id="search-dropdown">
-                        <option value="all">All</option>
-                        <option value="titles">Titles</option>
-                        <option value="descriptions">Descriptions</option>
-                    </select>
-                    <input type="text" name="search-query" id="search-query" placeholder="Search">
-                    <button type="submit" name="search-form"><i class="fa fa-search"></i></button>
-                </div>
-            </form>
-        </header>
+            <div class="collapse navbar-collapse" id="topNavBar">
+                <ul class="nav navbar-nav">
+
+                    <!-- Search post -->
+                    <form action="{% url 'search-post' %}" class="navbar-form navbar-left" role="search" method="get"  role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="search-query" id="search-query" placeholder="Search">
+                        </div>
+                        <button type="submit" name="search-form" class="btn btn-primary">Search</button>
+                    </form>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}-->
+                        <!-- Create Post -->
+                        <li class="" style="margin-left: 550px;">
+                            <a href="{% url 'create-post' %}">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> &nbsp; Create Post
+                            </a>
+                        </li>
+
+                        <!-- Logout -->
+                        <li class="" style="margin-left: 10px;">
+                            <a href="{% url 'logout' %}">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span> &nbsp; Logout
+                            </a>
+                        </li>
+                    {% else %}
+                        <!-- Signin -->
+                        <li class="" style="margin-left: 610px;">
+                            <a href="{% url 'signin' %}">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp; Signin
+                            </a>
+                        </li>
+
+                        <!-- Signup -->
+                        <li class="" style="margin-left: 5px;">
+                            <a href="{% url 'signup' %}">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> &nbsp; Signup
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
 
         {% block content %}
         {% endblock content %}
