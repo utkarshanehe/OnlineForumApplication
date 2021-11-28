@@ -32,7 +32,7 @@
                                         <a href="{{ forum.last_post.get_url }}">Last post</a>
                                         by {{ forum.last_post.author.full_name }}
                                         <br/>
-                                        on {{ forum.last_post.timestamp|date }}
+                                        on {{ forum.last_post.timestamp }}
                                     </td>
                                 </tr>
                             {% endfor %}

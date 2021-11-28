@@ -18,32 +18,62 @@
         </div>
 
         {% if post.closed == True %}
-        <div style="background-color: #fff; font-size: 15px; color: #F00; font-weight: bolder; padding-bottom:15px;  width: 100%;"> This Topic Is Closed! </div>
+        	<div style="background-color: #fff; font-size: 15px; color: #F00; font-weight: bolder; padding-bottom:15px;  width: 100%;">
+				This Topic Is Closed!
+			</div>
         {% endif %}
 
+		<!-- Show post info -->
+		<div class="comments-container">
+			<ul id="post-info" class="comments-list" style="height: 1%;">
+			<li>
+				<div class="comment-main-level">
+					<!-- Avatar -->
+					<div class="comment-avatar"><img src={{ post.author.profile_pic.url }} alt=""></div>
 
-        <!-- comment-reply code begins -->
+					<div class="comment-box">
+						<div class="comment-head">
+							<h5 class="comment-name by-author" style="font-size: 18px;"><a href="{{ post.get_url }}">{{ post.title|safe }}</a></h5>
+							<br/>
+							<h5 style="font-size: 14px; float: right;">
+								Posted by {{ post.author.full_name|title }}
+								on {{ post.timestamp }}
+								<i class="fa fa-eye" style="color: black;">&nbsp;&nbsp;{% get_hit_count for post %}</i>
+							</h5>
+						</div>
+						<div class="comment-content">
+							{{ post.content|safe }}
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+		</div>
+
+
+        <!-- Comment-reply code begins -->
         <div class="comments-container">
 
 		<!-- Add new comment -->
         {% if request.user.is_authenticated == False and post.closed == False %}
-        <div style="background-color: #fff; color: #000; font-weight: bolder; padding: 20px; width: 100%;">
-            You need to
-            <a href="{% url 'signin' %}">
-                <b>login</b>
-            </a>
-            to comment or reply!
-        </div>
+			<div style="background-color: #fff; color: #000; font-weight: bolder; padding: 20px; width: 100%;">
+				You need to
+				<a href="{% url 'signin' %}">
+					<b>login</b>
+				</a>
+				to comment or reply!
+			</div>
         {% elif post.closed == False %}
-        <form action="." method="POST">
-            {% csrf_token %}
-            <div class="comment-area hide" id="comment-area">
-                <textarea name="comment-input" id="comment-input" placeholder="Comment here"></textarea>
-                <input type="submit" value="Submit"name="comment-form">
-            </div>
-        </form>
+			<form action="." method="POST">
+				{% csrf_token %}
+				<div class="comment-area" id="comment-area">
+					<textarea name="comment-input" id="comment-input" placeholder="Post your comment here..."></textarea>
+					<input type="submit" value="Submit" name="comment-form" class="btn btn-primary">
+				</div>
+			</form>
         {% endif %}
 
+		<br/><br/>
 		<ul id="comments-list" class="comments-list">
 			{% for comment in post.comments.all %}
 			<li>
@@ -54,32 +84,29 @@
 					<div class="comment-box">
 						<div class="comment-head">
 							<h6 class="comment-name by-author">{{ comment.user.full_name|title}}</h6>
-
 							{% if post.closed == False and request.user.is_authenticated %}
 							<button style="background-color:#FFF; border: none;" onclick="showCommentReplyArea('comment-{{ comment.id }}');">
-								<i class="fa fa-reply"></i>
+								<h6 class="reply-btn"><i class="fa fa-reply"></i></h6>
 							</button>
 							{% endif %}
-
 						</div>
+
 						<div class="comment-content">
 							{{ comment.content }}
 						</div>
 
 						 <!-- Add new reply -->
 						{% if post.closed == False and request.user.is_authenticated%}
-						<br/>
 						<form action="." method="POST">
 							{% csrf_token %}
 							<div class="reply-area hide" id="comment-{{ comment.id }}">
 								<textarea name="reply-input" id="reply-input" placeholder="Reply here"></textarea>
-								<input type="submit" value="Submit" name="reply-form">
+								<input type="submit" value="Submit" name="reply-form" class="btn btn-primary">
 								<input type="hidden" name="comment-id" value="{{ comment.id }}">
 								<br/><br/><br/><br/>
 							</div>
 						</form>
 						{% endif %}
-
 					</div>
 				</div>
 
@@ -93,7 +120,7 @@
 						<div class="comment-box">
 							<div class="comment-head">
 								<h6 class="comment-name">{{ reply.user.full_name|title}}</h6>
-								<span>On {{ reply.timestamp|date }}</span>
+								<span>On {{ reply.timestamp }}</span>
 							</div>
 							<div class="comment-content">
 								 {{ reply.content }}
