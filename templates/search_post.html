@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load hitcount_tags %}
+{% load static %}
 {% block content %}
 
     <div class="container">
@@ -34,15 +35,15 @@
                                     <tr>
                                         <td class="post-status-icon">
                                            {% if post.closed == True %}
-                                                <div class="status"><i class="fa fa-lock"></i></div>
+                                                <div class="status-icon"><i class="fa fa-lock"></i></div>
                                             {% elif post.number_of_comments == 0 %}
-                                                <div class="status"><i class="fa fa-frown-o"></i></div>
+                                                <div class="status-icon"><i class="fa fa-frown-o"></i></div>
                                             {% elif post.number_of_comments > 0 and post.number_of_comments <= 2 %}
-                                                <div class="status"><i class="fa fa-book"></i></div>
+                                                <div class="status-icon"><i class="fa fa-book"></i></div>
                                             {% elif post.number_of_comments > 2 and post.number_of_comments <= 5 %}
-                                                <div class="status"><i class="fa fa-rocket"></i></div>
+                                                <div class="status-icon"><i class="fa fa-rocket"></i></div>
                                             {% elif post.number_of_comments >= 5 %}
-                                                <div class="status"><i class="fa fa-fire"></i></div>
+                                                <div class="status-icon/home/dell/Downloads/bg4.jpg"><i class="fa fa-fire"></i></div>
                                             {% endif %}
                                         </td>
 
@@ -99,6 +100,9 @@
             </div>
         {% else %}
             <h2>No posts found</h2>
+            <center>
+                <img src="{% static 'images/ResultNotFound.jpg' %}" alt="My image">
+            </center>
         {% endif %}
     </div>
 {% endblock content %}

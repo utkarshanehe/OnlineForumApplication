@@ -18,7 +18,7 @@
         </div>
 
         {% if post.closed == True %}
-        	<div style="background-color: #fff; font-size: 15px; color: #F00; font-weight: bolder; padding-bottom:15px;  width: 100%;">
+        	<div style="font-size: 18px; color: #F00; font-weight: bolder; padding-bottom:15px;  width: 100%;">
 				This Topic Is Closed!
 			</div>
         {% endif %}
@@ -57,12 +57,12 @@
 		<!-- Add new comment -->
         {% if request.user.is_authenticated == False and post.closed == False %}
 			<div style="color: #000; font-weight: bolder; padding: 20px; width: 100%;">
-				<br/><br/><br/><br/>
+				<br/><br/><br/><br/><br/><br/><br/>
 				You need to
 				<a href="{% url 'signin' %}">
 					<b>login</b>
 				</a>
-				to comment or reply!
+				to post the comment!
 			</div>
         {% elif post.closed == False %}
 			<form action="." method="POST">

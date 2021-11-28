@@ -34,15 +34,15 @@
                             <tbody>
                                 {% for post in posts %}
                                     <tr>
-                                        <td class="post-status-icon">
+                                        <td class="status-icon">
                                            {% if post.closed == True %}
                                                 <div class="status-icon"><i class="fa fa-lock"></i></div>
                                             {% elif post.number_of_comments <= 5 %}
                                                 <div class="status-icon"><i class="fa fa-book"></i></div>
                                             {% elif post.number_of_comments <= 10 %}
-                                                <div class="status-icon"><i class="fa fa-rocket"></i></div>
-                                            {% else %}
                                                 <div class="status-icon"><i class="fa fa-fire"></i></div>
+                                            {% else %}
+                                                <div class="status-icon"><i class="fa fa-rocket"></i></div>
                                             {% endif %}
                                         </td>
 

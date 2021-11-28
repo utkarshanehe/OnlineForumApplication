@@ -34,7 +34,7 @@ def show_posts(request, slug):
     posts = Post.objects.filter(approved=True, categories=category)
 
     # Pagination for the posts
-    paginator = Paginator(posts, 10)
+    paginator = Paginator(posts, 7)
     page = request.GET.get("page")
 
     try:
