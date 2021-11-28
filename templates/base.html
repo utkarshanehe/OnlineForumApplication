@@ -22,7 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{% url 'index' %}">Let'sDiscuss</a>
+                <a class="navbar-brand" href="{% url 'index' %}" style="color: white;">Let'sDiscuss</a>
             </div>
 
             <div class="collapse navbar-collapse" id="topNavBar">
@@ -40,28 +40,28 @@
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
                         <!-- Create Post -->
-                        <li class="" style="margin-left: 550px;">
+                        <li class="navbar-item" style="margin-left: 550px;">
                             <a href="{% url 'create-post' %}">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> &nbsp; Create Post
                             </a>
                         </li>
 
                         <!-- Logout -->
-                        <li class="" style="margin-left: 10px;">
+                        <li class="navbar-item" style="margin-left: 10px;">
                             <a href="{% url 'logout' %}">
                                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span> &nbsp; Logout
                             </a>
                         </li>
                     {% else %}
                         <!-- Signin -->
-                        <li class="" style="margin-left: 610px;">
+                        <li class="navbar-item" style="margin-left: 590px;">
                             <a href="{% url 'signin' %}">
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp; Signin
                             </a>
                         </li>
 
                         <!-- Signup -->
-                        <li class="" style="margin-left: 5px;">
+                        <li class="navbar-item" style="margin-left: 5px;">
                             <a href="{% url 'signup' %}">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> &nbsp; Signup
                             </a>
