@@ -3,12 +3,32 @@
 
 {% block content %}
 
-<h1 style="text-align:center; margin-block:50px; color:red;">Create An Account</h1>
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2-offset col-sm-4"></div>
+            <div class="col-sm-2-offset col-sm-5">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                         <h1 style="text-align:center; margin-block:50px;">Create An Account</h1>
+                        <form method="POST" action=".">
+                            {% csrf_token %}
 
-<form method="POST" action="." style="margin-left:150px;margin-bottom: 150px;">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <input type="submit" value="Signup"  style="margin-block:50px;">
-</form>
+                            {% for field in form %}
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <span class="text-danger">{{ field.errors }}</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="control-label">{{ field.label_tag }}</label>
+                                    </div>
+                                    <div class="col-sm-8">{{ field }}</div>
+                            {% endfor %}
+                            <input type="submit" value="Signup" style="margin-block:50px;" class="btn btn-primary">
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
 
 {% endblock content %}

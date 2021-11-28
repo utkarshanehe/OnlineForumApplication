@@ -275,3 +275,7 @@ ul {
 	cursor: pointer;
 	font-size: 16px;
 }
+
+.status-icon{
+    font-size: 28px;
+}

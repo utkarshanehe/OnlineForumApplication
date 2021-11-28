@@ -3,12 +3,23 @@
 
 {% block content %}
 
-<h1 style="text-align:center; margin-block:50px; color:red;">Sign In</h1>
-
-<form method="POST" action="." style="margin-left:150px;margin-bottom: 150px;">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <input type="submit" value="Sign In"  style="margin-block:50px;">
-</form>
-
+ <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2-offset col-sm-4"></div>
+            <div class="col-sm-2-offset col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                         <h1 style="text-align:center; margin-block:50px;">Sign In</h1>
+                        <form method="POST" action=".">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <center>
+                                <input type="submit" value="Sign In" style="margin-block:50px;" class="btn btn-primary">
+                            </center>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
 {% endblock content %}

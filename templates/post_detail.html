@@ -9,7 +9,7 @@
             <div class="forum-navigation">
                 <span>
                     <h4>
-                        <a href="{% url 'index' %}">ForumApp - Forums</a> >>
+                        <a href="{% url 'index' %}">Let'sDiscuss</a> >>
                         <a href="{{ post.categories.all.0.get_url }}">{{ post.categories.all.0 }}</a> >>
                         <a href="{{ post.get_url }}">{{ post.title }}</a>
                     </h4>
@@ -56,7 +56,8 @@
 
 		<!-- Add new comment -->
         {% if request.user.is_authenticated == False and post.closed == False %}
-			<div style="background-color: #fff; color: #000; font-weight: bolder; padding: 20px; width: 100%;">
+			<div style="color: #000; font-weight: bolder; padding: 20px; width: 100%;">
+				<br/><br/><br/><br/>
 				You need to
 				<a href="{% url 'signin' %}">
 					<b>login</b>

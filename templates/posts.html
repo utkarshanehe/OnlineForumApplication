@@ -8,7 +8,7 @@
             <div class="forum-navigation">
             <span>
                 <h4>
-                    <a href="{% url 'index' %}">ForumApp</a> >>
+                    <a href="{% url 'index' %}">Let'sDiscuss</a> >>
                     <a href="{{ forum.get_url }}">{{ forum.title }}</a>
                 </h4>
             </span>
@@ -36,15 +36,13 @@
                                     <tr>
                                         <td class="post-status-icon">
                                            {% if post.closed == True %}
-                                                <div class="status"><i class="fa fa-lock"></i></div>
-                                            {% elif post.number_of_comments == 0 %}
-                                                <div class="status"><i class="fa fa-frown-o"></i></div>
-                                            {% elif post.number_of_comments > 0 and post.number_of_comments <= 2 %}
-                                                <div class="status"><i class="fa fa-book"></i></div>
-                                            {% elif post.number_of_comments > 2 and post.number_of_comments <= 5 %}
-                                                <div class="status"><i class="fa fa-rocket"></i></div>
-                                            {% elif post.number_of_comments >= 5 %}
-                                                <div class="status"><i class="fa fa-fire"></i></div>
+                                                <div class="status-icon"><i class="fa fa-lock"></i></div>
+                                            {% elif post.number_of_comments <= 5 %}
+                                                <div class="status-icon"><i class="fa fa-book"></i></div>
+                                            {% elif post.number_of_comments <= 10 %}
+                                                <div class="status-icon"><i class="fa fa-rocket"></i></div>
+                                            {% else %}
+                                                <div class="status-icon"><i class="fa fa-fire"></i></div>
                                             {% endif %}
                                         </td>
 
@@ -58,9 +56,13 @@
                                         </td>
 
                                         <td>
-                                            {{ post.last_comment.timestamp }}
-                                            <br/>
-                                            By {{ post.last_comment.user.full_name|title }}
+                                            {% if post.number_of_comments > 0 %}
+                                                {{ post.last_comment.timestamp }}
+                                                <br/>
+                                                By {{ post.last_comment.user.full_name|title }}
+                                            {% else %}
+                                                <p>None</p>
+                                            {% endif %}
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -99,17 +101,12 @@
             <br/>
 
             <span>
-                <i class="fa fa-fire"></i> &nbsp;Popular topic
+                <i class="fa fa-fire"></i> &nbsp;Medium engagement topic
             </span>
             <br/>
 
             <span>
                 <i class="fa fa-book"></i> &nbsp;Low Engagement topic
-            </span>
-            <br/>
-
-            <span>
-                <i class="fa fa-frown-o"></i> &nbsp;0 Engagement topic
             </span>
             <br/>
 
